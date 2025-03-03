@@ -1,0 +1,95 @@
+{% extends 'ventas/base.html' %}
+{% load static%}
+
+{% block title %}Inventario detalle{% endblock %}
+
+{% block content %}
+    <div class="container-fluid p-3 mt-1" style="background-color: white;" >
+        <h1>Actualizar producto</h1>
+        <hr>
+        <div class="container ">
+          <div class="row justify-content-center">
+            <div class="col-sm-4"><h3>Nombre de prueba</h3><img src="{% static 'ventas/fototest.webp' %}" width="250"></div>
+            <div class="col-sm-4">
+              <h4>Descripcion</h4>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus a, quas dicta ex voluptate voluptas molestias amet possimus. Consequatur numquam quod, sed alias qui soluta nostrum veritatis tempore consequuntur esse.</p>
+
+              <p><strong>Categoria:</strong></p>
+              <p><strong>Precio:</strong></p>
+              <p><Strong>Stock:</Strong></p>
+            </div>
+          </div>
+          <hr>
+          <div class="container ">
+
+            <div class="row justify-content-center">
+              <div class="col-sm-4"><img src="{% static 'ventas/fototest.webp' %}" width="250"></div>
+              <div class="col-sm-4">
+                <h3>Editar producto</h3>
+                <br>
+                <!-- Aquí comienza el formulario -->
+                <form method="post">
+                  {% csrf_token %}
+                  {{ form.as_p }}  <!-- Muestra el formulario con los campos rellenados -->
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Actualizar_producto">Actualizar</button>
+                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Eliminar_producto">Eliminar</button>
+                  <a href="{% url 'inventario' %}" class="btn btn-dark">Volver</a>
+                </form>
+
+                <!-- Modal actualizar -->
+                <div class="modal fade" id="Actualizar_producto" tabindex="-1" aria-labelledby="Actualizar_producto" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="Actualizar_producto">Confirmación</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>¿Estas seguro de querer actualizar este producto?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                        <div id="liveAlertPlaceholder"></div>
+                        <button type="submit" class="btn btn-warning" class="liveAlertBtn">Actualizar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Modal Eliminar -->
+                <div class="modal fade" id="Eliminar_producto" tabindex="-1" aria-labelledby="Eliminar_producto" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="Eliminar_producto">Confirmación</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>¿Estas seguro de querer eliminar este producto?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger">Eliminar</button>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--Mensajes de alerta-->
+              {% if messages %}
+              <div id="liveAlertPlaceholder">
+                  {% for message in messages %}
+                 <div class="alert alert-{{ message.tags }} alert-dismissible mt-2" role="alert">
+                  {{ message|safe }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  {% endfor %}
+              </div>
+              {% endif %}
+            </div>
+
+    </div>
+
+       
+{%endblock%}

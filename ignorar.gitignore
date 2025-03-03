@@ -1,15 +1,3 @@
 # Archivos de Python
 __pycache__/
 *.pyc
-
-# Configuración de entorno
-.env
-venv/
-
-# Archivos de base de datos
-db.sqlite3
-
-# Archivos estáticos y migraciones
-/static/
-media/
-migrations/

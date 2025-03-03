@@ -1,0 +1,14 @@
+{% extends 'ventas/base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+
+    <div class="container-lg text-center  m-6 mt-3" style="background-color: white;">
+        <h2>Bienvenido al Sistema de Punto de Venta</h2>
+        <p>Selecciona una opción del menú para comenzar.</p>
+        <a href="{% url 'generar_boleta' %}" class="btn">Generar Boleta</a>
+
+    </div>
+
+{% endblock %}

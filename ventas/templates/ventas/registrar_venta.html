@@ -1,0 +1,76 @@
+{%extends 'ventas/base.html'%}
+
+
+{% block content %}
+<div class=" venta-container-1 p-3" style="background-color: rgb(63, 63, 63);">
+  <div class="venta-container-izquierda p-2">
+    <div class="centro">
+      <input type="text" placeholder="buscar" class="form-control">
+    </div>
+    <hr>
+    <div class="footer">
+      <div class="container text-center">
+        <div class="row align-items-start">
+          <div class="col">
+            <p><strong>Total Productos: </strong>12</p>
+          </div>
+          <div class="col">
+            <p><strong>Vendedor: </strong>Matias Sepulveda</p>
+          </div>
+          <div class="col">
+            <button class="btn btn-success">Pagar $9.000</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <div class="venta-container-derecha p-2">
+    <input type="text" placeholder="buscar" class="form-control">
+    <div class="row text-center p-1">
+      <div class="col">
+        <button class="btn btn-dark">General</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-dark ">Favoritos</button>
+      </div>
+
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+</div>
+
+
+{%endblock%}

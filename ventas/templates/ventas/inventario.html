@@ -1,0 +1,100 @@
+{% extends 'ventas/base.html' %}
+{% load static%}
+
+{% block title %}Agregar producto{% endblock %}
+
+{% block content %}
+    <div class="container-fluid p-3 mt-1" style="background-color: white;" >
+        <h1>Inventario</h1>
+        <hr>
+        <div class=" container-fluid">
+            <div class="row">
+              <div class="col-sm-8">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint saepe expedita possimus. Beatae at, illo perspiciatis praesentium deserunt necessitatibus dolorem, nulla debitis incidunt, quas similique fugit autem dolores vero voluptas.</div>
+              <div class="col-sm-4  border border-success p-1" role="alert"> 
+                <h4 class="text text-center">Total Stock</h4>
+                <hr>
+                <p class="text-center">{{stock_total}}</p>
+              </div>
+            </div>
+            <div class="row text-center mt-2 container">
+              <a href="{% url 'agregar_producto' %}" class="col-sm btn btn-sm btn-dark m-1">opcion</a>
+              <a href="{% url 'agregar_producto' %}" class="col-sm btn btn-sm btn-dark m-1">opcion</a>
+              <a href="{% url 'agregar_producto' %}" class="col-sm btn btn-sm btn-dark m-1">Agregar producto</a>
+            </div>
+          </div>
+        <hr>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+              <tr>
+                <td>{{ producto.id }}</td>
+                <td>{{producto.nombre}}</td>
+                <td>{{ producto.categoria }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>
+                  <!-- EDITAR PRODUCTO -->
+                  <a href="{% url 'inventario_editar' producto.id %}" class="btn btn-warning">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-pen" viewBox="0 0 16 16">
+                      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                    </svg>
+                  </a>
+                  <!-- VER PRODUCTO DETALLADO -->
+                  <a href="" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#inventario_detalle_{{producto.id}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-eye" viewBox="0 0 16 16">
+                      <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                      <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                    </svg>
+                  </a>
+                  <!-- Modal -->
+                  <div class="modal fade" id="inventario_detalle_{{producto.id}}" tabindex="-1" aria-labelledby="inventario_detalle_{{producto.id}}" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="inventario_detalle_{{producto.id}}">Datalles del producto</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="container ">
+                            <div class="row justify-content-center">
+                              <div class="col-sm-8"><h2>{{producto.nombre}}</h2><img src="{% static 'ventas/fototest.webp' %}" width=""></div>
+                              <div class="col-sm-4">
+                                <h4>Descripcion</h4>
+                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus a, quas dicta ex voluptate voluptas molestias amet possimus. Consequatur numquam quod, sed alias qui soluta nostrum veritatis tempore consequuntur esse.</p>
+                  
+                                <p><strong>Categoria: </strong>{{producto.categoria}}</p>
+                                <p><strong>Precio: </strong>{{producto.precio}}</p>
+                                <p><Strong>Stock: </Strong>{{producto.stock}}</p>
+                              </div>
+                              
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+
+                {% empty %}
+                <tr>
+                    <td colspan="5">No hay productos en el inventario</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+
+          </table>
+    </div>
+
+{%endblock%}

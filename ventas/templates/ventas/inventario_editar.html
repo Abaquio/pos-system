@@ -1,0 +1,105 @@
+{% extends 'ventas/base.html' %}
+{% load static %}
+
+{% block title %}Inventario detalle{% endblock %}
+
+{% block content %}
+    <div class="container-fluid p-3 mt-1" style="background-color: white;">
+        <h1>Actualizar producto</h1>
+        <hr>
+        
+        <!-- Mensajes de alerta -->
+        {% if messages %}
+            <div id="liveAlertPlaceholder">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible mt-2" role="alert">
+                        {{ message|safe }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-4">
+                    <h3>Nombre de prueba</h3>
+                    <img src="{% static 'ventas/fototest.webp' %}" width="250">
+                </div>
+                <div class="col-sm-4">
+                    <h4>Descripción</h4>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus a, quas dicta ex voluptate voluptas molestias amet possimus. Consequatur numquam quod, sed alias qui soluta nostrum veritatis tempore consequuntur esse.</p>
+                    <p><strong>Categoría:</strong></p>
+                    <p><strong>Precio:</strong></p>
+                    <p><strong>Stock:</strong></p>
+                </div>
+            </div>
+            <hr>
+            
+            <div class="row justify-content-center">
+                <div class="col-sm-4">
+                    <img src="{% static 'ventas/fototest.webp' %}" width="250">
+                </div>
+                <div class="col-sm-4">
+                    <h3>Editar producto</h3>
+                    <br>
+                    <!-- Formulario -->
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="button" class="btn btn-warning m-1" data-bs-toggle="modal" data-bs-target="#Actualizar_producto">Actualizar</button>
+                        <!-- Modal Actualizar -->
+                        <div class="modal fade" id="Actualizar_producto" tabindex="-1" aria-labelledby="Actualizar_producto" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h1 class="modal-title fs-5">Confirmación</h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <p>¿Estás seguro de querer actualizar este producto?</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                                      <button type="submit" class="btn btn-warning">Actualizar</button>
+                                  </div>
+                              </div>
+                          </div>
+                        </div> 
+                    </form>
+                    <!-- Botón para abrir el modal de eliminar -->
+                    <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#Eliminar_producto">Eliminar</button>
+
+                    <!-- Modal Eliminar -->
+                    <div class="modal fade" id="Eliminar_producto" tabindex="-1" aria-labelledby="Eliminar_producto" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5">Confirmación</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>¿Estás seguro de querer eliminar este producto?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                                    <form method="post" action="{% url 'eliminar_producto' producto.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="{% url 'inventario' %}" class="btn btn-dark m-1">Volver</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

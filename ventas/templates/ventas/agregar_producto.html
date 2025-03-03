@@ -1,0 +1,31 @@
+{% extends 'ventas/base.html' %}
+
+{% block title %}Agregar producto{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-3 mt-1" style="background-color: white;" >
+    <h1>Agregar nuevo producto</h1>
+    <hr>
+    <div class="container" >
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div id="liveAlertPlaceholder"></div>
+            <button type="submit" class="btn btn-dark" id="liveAlertBtn">Guardar Producto</button>
+            <a href="{% url 'inventario' %}" class="btn btn-dark">Volver</a>
+        </form>
+
+        {% if messages %}
+            <div id="liveAlertPlaceholder">
+                {% for message in messages %}
+               <div class="alert alert-{{ message.tags }} alert-dismissible mt-2" role="alert">
+                {{ message|safe }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{%endblock%}
